@@ -1,0 +1,22 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "description": "MERN shopping cart",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kcansari/proshop.git"
+  },
+  "author": "Kemal Can SARI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kcansari/proshop/issues"
+  },
+  "homepage": "https://github.com/kcansari/proshop#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
