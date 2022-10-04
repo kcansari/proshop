@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/kcansari/proshop#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.5",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "concurrently": "^7.4.0",
