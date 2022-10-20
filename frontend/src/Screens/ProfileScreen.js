@@ -21,6 +21,9 @@ const ProfileScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+  const { success } = userUpdateProfile
+
   const redirect = window.location.search
     ? window.location.search.split('=')[1]
     : '/'
