@@ -28,7 +28,7 @@ const Header = () => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <LinkContainer to='/cart'>
+              <LinkContainer to='/cart/:id/:qty'>
                 <Nav.Link>
                   {' '}
                   <i className='fa-sharp fa-solid fa-cart-shopping'></i> Cart
