@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../Components/Message.js'
@@ -21,9 +21,9 @@ const ProfileScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const redirect = window.location.search
-    ? window.location.search.split('=')[1]
-    : '/'
+  // const redirect = window.location.search
+  //   ? window.location.search.split('=')[1]
+  //   : '/'
 
   const navigate = useNavigate()
 
