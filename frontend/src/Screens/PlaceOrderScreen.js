@@ -18,7 +18,6 @@ const PlaceOrderScreen = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
   const navigate = useNavigate()
-  const orderCart = {}
 
   //   Calculate prices
   const addDecimals = (num) => {

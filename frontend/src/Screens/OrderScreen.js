@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
-  Button,
   Row,
   Col,
   ListGroup,
@@ -27,7 +26,7 @@ const OrderScreen = () => {
       dispatch(getOrderDetails(orderId))
     }
     // eslint-disable-next-line
-  }, [order, orderId])
+  }, [order, orderId, dispatch])
 
   return loading ? (
     <Loader />
