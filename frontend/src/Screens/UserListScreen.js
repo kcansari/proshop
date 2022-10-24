@@ -5,7 +5,7 @@ import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../Components/Message.js'
 import Loader from '../Components/Loader.js'
-import { listUsers } from '../actions/userActions.js'
+import { listUsers, deleteUser } from '../actions/userActions.js'
 
 const UserListScreen = () => {
   const dispatch = useDispatch()
@@ -17,8 +17,13 @@ const UserListScreen = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  const userDelete = useSelector((state) => state.userDelete)
+  const { success: successDelete } = userDelete
+
   const deleteHandler = (id) => {
-    console.log('delete')
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteUser(id))
+    }
   }
 
   useEffect(() => {
@@ -28,7 +33,7 @@ const UserListScreen = () => {
       navigate('/login')
     }
     // eslint-disable-next-line
-  }, [dispatch, navigate])
+  }, [dispatch, navigate, successDelete])
   return (
     <>
       <h1>Users</h1>
@@ -56,7 +61,7 @@ const UserListScreen = () => {
                   <a href={`mailto:${user.email}`}>{user.email}</a>
                 </td>
                 <td>
-                  {user.idAdmin ? (
+                  {user.isAdmin ? (
                     <i className='fas fa-check' style={{ color: 'green' }}></i>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
