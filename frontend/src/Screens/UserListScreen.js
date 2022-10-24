@@ -1,31 +1,39 @@
 import React, { useEffect } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../Components/Message.js'
-// import Loader from '../Components/Loader.js'
+import Loader from '../Components/Loader.js'
 import { listUsers } from '../actions/userActions.js'
 
 const UserListScreen = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userList = useSelector((state) => state.userList)
   const { loading, error, users } = userList
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   const deleteHandler = (id) => {
     console.log('delete')
   }
 
   useEffect(() => {
-    dispatch(listUsers())
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers())
+    } else {
+      navigate('/login')
+    }
     // eslint-disable-next-line
-  }, [dispatch])
+  }, [dispatch, navigate])
   return (
     <>
       <h1>Users</h1>
       {loading ? (
-        <loader />
+        <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
