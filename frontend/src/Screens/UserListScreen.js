@@ -33,7 +33,7 @@ const UserListScreen = () => {
       navigate('/login')
     }
     // eslint-disable-next-line
-  }, [dispatch, navigate, successDelete])
+  }, [dispatch, navigate, successDelete, userInfo])
   return (
     <>
       <h1>Users</h1>
@@ -68,7 +68,7 @@ const UserListScreen = () => {
                   )}
                 </td>
                 <td>
-                  <LinkContainer to={`/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
                       <i className='fas fa-edit'></i>
                     </Button>
