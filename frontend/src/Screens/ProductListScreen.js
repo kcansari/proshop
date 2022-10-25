@@ -5,7 +5,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../Components/Message.js'
 import Loader from '../Components/Loader.js'
-import { listProducts } from '../actions/productActions.js'
+import { listProducts, deleteProduct } from '../actions/productActions.js'
 
 const ProductListScreen = () => {
   const dispatch = useDispatch()
@@ -15,12 +15,19 @@ const ProductListScreen = () => {
   const productList = useSelector((state) => state.productList)
   const { loading, error, products } = productList
 
+  const productDelete = useSelector((state) => state.productDelete)
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure')) {
-      // DELETE PRODUCTS
+      dispatch(deleteProduct(id))
     }
   }
 
@@ -35,7 +42,7 @@ const ProductListScreen = () => {
       navigate('/login')
     }
     // eslint-disable-next-line
-  }, [dispatch, navigate, userInfo])
+  }, [dispatch, navigate, userInfo, successDelete])
   return (
     <>
       <Row className='align-items-center'>
@@ -48,6 +55,8 @@ const ProductListScreen = () => {
           </Button>
         </Col>
       </Row>
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
