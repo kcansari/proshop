@@ -5,7 +5,12 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../Components/Message.js'
 import Loader from '../Components/Loader.js'
-import { listProducts, deleteProduct } from '../actions/productActions.js'
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from '../actions/productActions.js'
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants.js'
 
 const ProductListScreen = () => {
   const dispatch = useDispatch()
@@ -22,6 +27,14 @@ const ProductListScreen = () => {
     success: successDelete,
   } = productDelete
 
+  const productCreate = useSelector((state) => state.productCreate)
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -31,18 +44,31 @@ const ProductListScreen = () => {
     }
   }
 
-  const createProductHandler = (product) => {
-    console.log('You have clicked create product button')
+  const createProductHandler = () => {
+    dispatch(createProduct())
   }
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts())
-    } else {
+    dispatch({ type: PRODUCT_CREATE_RESET })
+
+    if (!userInfo.isAdmin) {
       navigate('/login')
     }
+
+    if (successCreate) {
+      navigate(`/admin/product/${createdProduct._id}/edit`)
+    } else {
+      dispatch(listProducts())
+    }
     // eslint-disable-next-line
-  }, [dispatch, navigate, userInfo, successDelete])
+  }, [
+    dispatch,
+    navigate,
+    userInfo,
+    successDelete,
+    successCreate,
+    createdProduct,
+  ])
   return (
     <>
       <Row className='align-items-center'>
@@ -57,6 +83,8 @@ const ProductListScreen = () => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
