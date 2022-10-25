@@ -14,6 +14,7 @@ import PlaceOrderScreen from './Screens/PlaceOrderScreen'
 import OrderScreen from './Screens/OrderScreen'
 import UserListScreen from './Screens/UserListScreen'
 import UserEditScreen from './Screens/UserEditScreen'
+import ProductListScreen from './Screens/ProductListScreen'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/admin/userlist' element={<UserListScreen />} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
+            <Route path='/admin/productlist' element={<ProductListScreen />} />
           </Routes>
         </Container>
       </main>
