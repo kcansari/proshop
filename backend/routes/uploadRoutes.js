@@ -20,7 +20,7 @@ function checkFileType(file, cb) {
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
 
-  if (extname && mime) {
+  if (extname && mimetype) {
     return cb(null, true)
   } else {
     cb('Images only!!')
