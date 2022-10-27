@@ -1,4 +1,5 @@
 import path from 'path'
+import morgan from 'morgan'
 import express from 'express'
 import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import connectDB from './config/db.js'
@@ -10,8 +11,13 @@ import uploadRoutes from './routes/uploadRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 dotenv.config()
-const app = express()
 connectDB()
+
+const app = express()
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'))
+}
 
 // Allow us to accept JSON data in the body.
 app.use(express.json())
