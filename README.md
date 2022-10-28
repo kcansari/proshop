@@ -40,6 +40,4 @@ pw: m_^?CDL6
 
 ## [Demo](https://proshopkcs.herokuapp.com/)
 
-## License
-
-The MIT License
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
